@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perhitungan M/M/2 dengan Rumus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+            padding: 2rem;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 1.5rem;
+        }
+        input[type="text"] {
+            padding: 0.5rem;
+            margin-right: 0.5rem;
+        }
+        button {
+            padding: 0.5rem 1rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            background-color: #e9ecef;
+            padding: 1rem;
+            border-radius: 0.5rem;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Perhitungan Model Antrian M/M/2 dengan Rumus</h1>
+    <form method="post">
+        <label for="lambda">Laju Kedatangan (λ):</label>
+        <input type="text" id="lambda" name="lambda" required>
+        <label for="mu">Laju Pelayanan (μ):</label>
+        <input type="text" id="mu" name="mu" required>
+        <button type="submit">Hitung</button>
+    </form>
+    
+    {% if result %}
+        <div class="result">
+            {% if result.error %}
+                <p class="error">{{ result.error }}</p>
+            {% else %}
+                <p><strong>Hasil Perhitungan:</strong></p>
+                <ul>
+                    <li><strong>Laju Kedatangan (λ):</strong> {{ result.lambda_ }}</li>
+                    <li><strong>Laju Pelayanan (μ):</strong> {{ result.mu }}</li>
+                    <li>
+                        <strong>Pemanfaatan Pelayan (ρ):</strong> {{ result.rho }} <br>
+                        <small>{{ result.rho_formula }}</small>
+                    </li>
+                    <li>
+                        <strong>Waktu Rata-rata dalam Sistem (W):</strong> {{ result.w }} menit <br>
+                        <small>{{ result.w_formula }}</small>
+                    </li>
+                    <li>
+                        <strong>Waktu Rata-rata dalam Antrian (Wq):</strong> {{ result.wq }} menit <br>
+                        <small>{{ result.wq_formula }}</small>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
